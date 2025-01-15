@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Subject</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            font-size: 1.5rem;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            padding: 15px;
+        }
+
+        .card-footer {
+            text-align: right;
+            background-color: #f8f9fa;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            padding: 10px 20px;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            padding: 10px;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .alert {
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .col-md-12 {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- General form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Add Subject</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- Form start -->
+                        <form id="subjectForm" role="form" method="POST" action="/add_subject_save/">
+                            <!-- CSRF Token -->
+                            <input type="hidden" name="csrfmiddlewaretoken" value="your-csrf-token-here">
+
+                            <!-- Display Messages -->
+                            <div id="message" class="form-group" style="display: none;">
+                                <div class="col-12">
+                                    <div id="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+                                        Subject added successfully!
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div id="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        There was an error adding the subject.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <!-- Subject Name Input -->
+                                <div class="form-group">
+                                    <label for="subject">Subject Name</label>
+                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject" required>
+                                </div>
+
+                                <!-- Course Selection Dropdown -->
+                                <div class="form-group">
+                                    <label for="course">Course</label>
+                                    <select class="form-control" id="course" name="course" required>
+                                        <option value="">Select Course</option>
+                                        <!-- Dynamic Course Options -->
+                                        <option value="1">BTech-MTech Cybersecurity</option>
+                                        <option value="2">BSc-MSc Forensic</option>
+                                        <option value="3">BSc-LLB</option>
+                                        <option value="4">MSc Forensic</option>
+                                        <option value="5">LLM</option>
+                                    </select>
+                                </div>
+
+                                <!-- Staff Selection Dropdown -->
+                                <div class="form-group">
+                                    <label for="staff">Staff</label>
+                                    <select class="form-control" id="staff" name="staff" required>
+                                        <option value="">Select Staff</option>
+                                        <!-- Dynamic Staff Options -->
+                                        <option value="1">Staff 1</option>
+                                        <option value="2">Staff 2</option>
+                                        <option value="3">Staff 3</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Add Subject</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Add Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Example of dynamically showing success or error message
+        document.getElementById('subjectForm').onsubmit = function(event) {
+            event.preventDefault(); // Prevent actual form submission for demo
+
+            // Simulate success or failure
+            const success = Math.random() > 0.5; // Random success or failure
+
+            const messageElement = document.getElementById('message');
+            if (success) {
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('errorMessage').style.display = 'none';
+            } else {
+                document.getElementById('successMessage').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+
+            // Display the message section
+            messageElement.style.display = 'block';
+        };
+    </script>
+</body>
+
+</html>
